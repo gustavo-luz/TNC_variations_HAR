@@ -1,0 +1,13 @@
+scipy
+scikit-learn
+statsmodels
+torch
+tqdm
+urllib3
+neurokit2
+numpy
+pandas
+requests
+seaborn
+wfdb
+git+https://github.com/TimeSynth/TimeSynth.git
