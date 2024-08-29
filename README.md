@@ -3,6 +3,10 @@
 
 Code for An Evaluation of Temporal Neighborhood Coding Variants in Smartphone-Based Human Activity Recognition published at the 34th Brazilian Conference on Intelligent Systems (BRACIS)
 
+<div align="center">
+<img src="utils/tnc_variations.png" width=75% height=75%> 
+<p>REBAR Contrastive Learning Approach<p>
+</div>
 
 This repository includes code to reproduce the experimental results. This includes code for running both of our downstream evaluations, Linear Probe Classification and TSNE, and code to download and preprocess each of UCI-raw dataset, directly from their original online repositories. 
 
