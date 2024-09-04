@@ -12,10 +12,13 @@ adf_values = [True, False]
 num_runs = 8  # Number of times to run each variant
 
 # output file
-csv_filename = "experiments/out/experiment_results.csv"
+output_dir = "experiments/out"
+csv_filename = "experiment_results.csv"
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir, exist_ok=True)
 
 results_df = pd.DataFrame(columns=["variant", "acc", "auprc", "auroc", "balanced_acc", "f1", "training_time"])
-results_df.to_csv(csv_filename, index=False)
+results_df.to_csv(f'{output_dir}/csv_filename', index=False)
 
 # Iterate over all combinations of w, encoder_type, and adf
 for w in w_values:

@@ -4,11 +4,9 @@ import matplotlib.pyplot as plt
 
 import scipy.stats as stats
 
-data = pd.read_csv('experiments/out/experiment_results.csv')
-data
+data = pd.read_csv('experiment_results.csv')
 
-
-data_plot = pd.read_csv('experiments/out/experiment_results.csv')
+data_plot = data.copy()
 
 # Extract encoder type (RNN or TS2Vec) from the variant column
 data_plot['encoder'] = data_plot['variant'].str.extract(r'(RNN|TS2Vec)')
@@ -131,13 +129,11 @@ metrics = ['acc', 'auprc', 'auroc', 'balanced_acc', 'f1']
 
 # Wilcoxon signed-rank test
 def wilcoxon_test(df, metric):
-    rnn_values = df[df['variant'].str.contains('RNN')][metric].dropna()
-    ts2vec_values = df[df['variant'].str.contains('TS2Vec')][metric].dropna()
-    min_len = min(len(rnn_values), len(ts2vec_values))
-    if min_len > 0 and len(rnn_values) == len(ts2vec_values):  # Check for pairing
-        rnn_values = rnn_values.sample(min_len).reset_index(drop=True)
-        ts2vec_values = ts2vec_values.sample(min_len).reset_index(drop=True)
+    rnn_values = df[df['variant'].str.contains('RNN')][metric].dropna().reset_index(drop=True)
+    ts2vec_values = df[df['variant'].str.contains('TS2Vec')][metric].dropna().reset_index(drop=True)
+    if len(rnn_values) == len(ts2vec_values):  # Check for pairing
         stat, p_value = stats.wilcoxon(rnn_values, ts2vec_values)
+        print(stat,p_value)
         return pd.DataFrame({'Wilcoxon Statistic': [stat], 'p-value': [p_value]}, index=[metric])
     else:
         return pd.DataFrame({'Wilcoxon Statistic': [None], 'p-value': [None]}, index=[metric])
@@ -171,6 +167,6 @@ results_df = pd.DataFrame(results_list)
 
 print("Analysis complete.")
 
-results_df.to_csv('experiments/out/wilcoxon_results.csv', index=False)
+results_df.to_csv('wilcoxon_results.csv', index=False)
 
 print(results_df)

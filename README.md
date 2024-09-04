@@ -21,12 +21,6 @@ To run this project, first install the requirements:
 
     pip install -r requirements.txt
 
-Another option is to run it with [miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) to manage dependencies. After installing miniconda, we can install the environment with the following terminal commands:
-
-    conda env create -f rebar.yml
-    conda activate rebar
-    pip install -e .
-
 
 We can then download and preprocess the HAR dataset by running this command:
 
@@ -42,7 +36,7 @@ To run all the TNC variants for har:
 
     python run_all_experiments.py
 
-This code is going to run 8 executions of each variant and save the results to experiments/out/experiment_results.csv
+This code is going to run by default 8 executions of each variant and save the results to experiment_results.csv
 
 ## Custom Training and Evaluating
 

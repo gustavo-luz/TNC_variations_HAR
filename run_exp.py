@@ -6,16 +6,11 @@ import pandas as pd
 from utils.utils import printlog, load_data, import_model, init_dl_program
 from experiments.utils_downstream import eval_classification, eval_cluster, plot_confusion_matrix, plot_tsne
 
-from experiments.configs.ts2vec_expconfigs import allts2vec_expconfigs
 from experiments.configs.tnc_expconfigs import alltnc_expconfigs
-from experiments.configs.cpc_expconfigs import allcpc_expconfigs
-from experiments.configs.simclr_expconfigs import allsimclr_expconfigs
-from experiments.configs.slidingmse_expconfigs import allslidingmse_expconfigs
-from experiments.configs.rebar_expconfigs import allrebar_expconfigs
 from sklearn.manifold import TSNE
 import time
 
-all_expconfigs = {**allts2vec_expconfigs, **alltnc_expconfigs, **allcpc_expconfigs, **allsimclr_expconfigs, **allslidingmse_expconfigs, **allrebar_expconfigs}
+all_expconfigs = {**alltnc_expconfigs}
 
 
 if __name__ == "__main__":
@@ -43,6 +38,8 @@ if __name__ == "__main__":
         log_dir = model.run_dir
         training_time = round(end - start,3)
         printlog(f"time to fit the model: {training_time} seconds", path=log_dir)
+    else:
+        training_time = "N/A"
 
     train_data, train_labels, val_data, val_labels, test_data, test_labels = load_data(config=config, data_type="subseq")
     model = import_model(config, reload_ckpt=True)
